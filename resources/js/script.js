@@ -8,9 +8,9 @@ const toColor = (firstColor, secondColor) => {  // toColor means firstColor to s
     body.classList.remove(firstColor);
     body.classList.add(secondColor);
     // first letter capital
-    btn.innerText = `Switch to ${secondColor[0].toUpperCase() + secondColor.slice(1)}`;
+    btn.innerText = `Switch to ${firstColor[0].toUpperCase() + firstColor.slice(1)}`;
     // first letter capital
-    modeTitle.innerText = `${firstColor[0].toUpperCase() + firstColor.slice(1)} Mode`;
+    modeTitle.innerText = `${secondColor[0].toUpperCase() + secondColor.slice(1)} Mode`;
     localStorage.colorMode = secondColor;
     btnMode = firstColor;
 }
