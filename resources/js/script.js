@@ -1,26 +1,29 @@
 const btn = document.querySelector('.btn-dark');
 const body = document.querySelector('body');
-const stateHeading = document.querySelector('.content h1');
+const modeTitle = document.querySelector('.content h1');
+//  controls the toggle btn
+let btnMode = localStorage.colorMode === 'dark' ? 'light' : 'dark';
+
+const toColor = (firstColor, secondColor) => {  // toColor means firstColor to secondColor
+    body.classList.remove(firstColor);
+    body.classList.add(secondColor);
+    // first letter capital
+    btn.innerText = `Switch to ${secondColor[0].toUpperCase() + secondColor.slice(1)}`;
+    // first letter capital
+    modeTitle.innerText = `${firstColor[0].toUpperCase() + firstColor.slice(1)} Mode`;
+    localStorage.colorMode = secondColor;
+    btnMode = firstColor;
+}
+const changeColorState = (colorMode) => {
+    if (colorMode === 'dark') {
+        toColor('light', 'dark');  // light to dark
+    }
+    else {
+        toColor('dark', 'light');  // dark to light
+    }
+}
+changeColorState(localStorage.colorMode);  // controls the user's pre used color mode
 
 btn.addEventListener('click', () => {
-    let colorState;
-    let btnState;
-    if (body.classList.contains('light')) {
-        body.classList.remove('light');
-        body.classList.add('dark');
-        btnState = 'Light';
-        colorState = 'Dark';
-        btn.innerHTML = `Switch to ${btnState}`;
-        stateHeading.innerHTML = `${colorState} Mode`;
-
-    } else if (body.classList.contains('dark')) {
-        body.classList.remove('dark');
-        body.classList.add('light');
-        btnState = 'Dark';
-        colorState = 'Light';
-        btn.innerHTML = `Switch to ${btnState}`;
-        stateHeading.innerHTML = `${colorState} Mode`;
-
-    }
-})
-
+    changeColorState(btnMode);
+});
